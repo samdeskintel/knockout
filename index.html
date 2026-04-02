@@ -8,8 +8,8 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --green: #1D9E75; --green-dark: #0F6E56; --green-light: #EAF3DE; --green-text: #3B6D11;
-    --red-light: #FAECE7; --red-text: #993C1D;
-    --amber-light: #FAEEDA; --amber-text: #854F0B;
+    --red: #D85A30; --red-dark: #993C1D; --red-light: #FAECE7; --red-text: #993C1D;
+    --amber-light: #FAEEDA; --amber-text: #854F0B; --amber-mid: #BA7517;
     --blue-light: #E6F1FB; --blue-text: #185FA5;
     --gray-light: #F1EFE8; --gray-text: #5F5E5A;
     --border: #E2E0DA; --surface: #F7F6F3; --white: #ffffff;
@@ -20,7 +20,7 @@
   .page { max-width: 880px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
 
   /* Hero */
-  .hero { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); border-left: 4px solid var(--green); padding: 2rem 2rem 1.75rem; margin-bottom: 2rem; }
+  .hero { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); border-left: 4px solid var(--green); padding: 2rem 2rem 1.75rem; margin-bottom: 1.25rem; }
   .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 0.6rem; }
   .headline { font-size: 28px; font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 0.5rem; }
   .subhead { font-size: 15px; color: var(--text-muted); }
@@ -30,6 +30,29 @@
   .p-blue { background: var(--blue-light); color: var(--blue-text); }
   .p-amber { background: var(--amber-light); color: var(--amber-text); }
   .p-gray { background: var(--gray-light); color: var(--gray-text); }
+  .p-red { background: var(--red-light); color: var(--red-text); }
+
+  /* Investigation Tax Hero Block */
+  .tax-hero { background: #1a1a18; border-radius: var(--radius); padding: 2rem 2rem 1.75rem; margin-bottom: 2.5rem; }
+  .tax-hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #EF9F27; margin-bottom: 0.75rem; }
+  .tax-hero-headline { font-size: 24px; font-weight: 600; color: #ffffff; line-height: 1.25; margin-bottom: 0.75rem; }
+  .tax-hero-sub { font-size: 14px; color: #9e9e99; line-height: 1.7; margin-bottom: 1.5rem; }
+  .tax-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  @media (max-width: 560px) { .tax-stat-row { grid-template-columns: 1fr; } }
+  .tax-stat { background: #2a2a28; border-radius: var(--radius-sm); padding: 1rem; }
+  .tax-stat-num { font-size: 22px; font-weight: 600; color: #EF9F27; margin-bottom: 2px; }
+  .tax-stat-label { font-size: 12px; color: #9e9e99; line-height: 1.4; }
+  .tax-divider { border: none; border-top: 1px solid #2a2a28; margin: 1.25rem 0; }
+  .tax-closer { font-size: 18px; font-weight: 600; color: #ffffff; text-align: center; line-height: 1.4; }
+  .tax-closer span { color: var(--green); }
+
+  /* Frame cards */
+  .frame-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media (max-width: 580px) { .frame-grid { grid-template-columns: 1fr; } }
+  .frame-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; }
+  .frame-label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .frame-audience { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+  .frame-quote { font-size: 13px; font-style: italic; color: var(--text); line-height: 1.65; border-left: 3px solid var(--red); padding-left: 10px; }
 
   /* Sections */
   .section { margin-bottom: 2.5rem; }
@@ -40,7 +63,7 @@
   /* Cards */
   .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
   .card-green { border-left: 4px solid var(--green); }
-  .card-red { border-left: 4px solid #D85A30; }
+  .card-red { border-left: 4px solid var(--red); }
 
   /* Taglines */
   .tagline-list { display: flex; flex-direction: column; gap: 6px; margin-top: 0.75rem; }
@@ -68,7 +91,6 @@
   .aud-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
   /* Tabs */
-  .tabs { margin-bottom: 0; }
   .tab-row { display: flex; gap: 4px; flex-wrap: wrap; }
   .tab-btn { font-size: 13px; padding: 7px 15px; border: 1px solid var(--border); border-bottom: none; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--surface); color: var(--text-muted); cursor: pointer; font-family: inherit; transition: background 0.12s; }
   .tab-btn:hover { background: #ece9e4; }
@@ -85,7 +107,6 @@
   .email-body { font-size: 13px; line-height: 1.75; color: var(--text); white-space: pre-line; }
 
   /* Discovery Qs */
-  .q-group { margin-bottom: 1rem; }
   .q-item { padding: 9px 0; border-bottom: 1px solid var(--border); }
   .q-item:last-child { border-bottom: none; }
   .q-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 3px; }
@@ -93,7 +114,7 @@
   .q-text { font-size: 13px; font-style: italic; color: var(--text); }
 
   /* Quote block */
-  .quote-block { border-left: 3px solid #E24B4A; background: var(--red-light); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1rem 1.25rem; font-size: 14px; font-style: italic; line-height: 1.75; color: var(--text); margin: 0; white-space: pre-line; }
+  .quote-block { border-left: 3px solid var(--red); background: var(--red-light); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1rem 1.25rem; font-size: 14px; font-style: italic; line-height: 1.75; color: var(--text); white-space: pre-line; }
 
   /* LinkedIn series */
   .li-post { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 12px; }
@@ -106,16 +127,23 @@
   .checklist li:last-child { border-bottom: none; }
   .chk { width: 16px; height: 16px; border: 1.5px solid var(--border); border-radius: 3px; flex-shrink: 0; margin-top: 3px; background: var(--white); }
 
-  /* Divider */
-  hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
-
   /* UserGems callout */
   .usergems-box { background: var(--amber-light); border: 1px solid #FAC775; border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin-bottom: 1.25rem; font-size: 13px; color: var(--amber-text); }
   .usergems-box strong { font-weight: 600; }
 
+  /* Deploy row */
+  .deploy-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.75rem; }
+  @media (max-width: 560px) { .deploy-row { grid-template-columns: 1fr; } }
+  .deploy-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 1rem; }
+  .deploy-surface { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 4px; }
+  .deploy-text { font-size: 13px; color: var(--text); font-style: italic; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
   @media (max-width: 480px) {
     .headline { font-size: 22px; }
     .tab-btn { font-size: 12px; padding: 6px 10px; }
+    .tax-hero-headline { font-size: 20px; }
   }
 </style>
 </head>
@@ -135,16 +163,85 @@
     </div>
   </div>
 
+  <!-- Investigation Tax Hero -->
+  <div class="tax-hero">
+    <div class="tax-hero-eyebrow">Core campaign concept</div>
+    <div class="tax-hero-headline">Every alert comes with an investigation tax.<br>Most platforms make your team pay it.</div>
+    <div class="tax-hero-sub">Before any alert becomes a decision, your analysts pay a hidden cost — verifying accuracy, geo-locating the incident, assessing relevance, and building context manually. That's the investigation tax. It compounds at scale, widens your response window, and burns out the people who can least afford to be distracted.</div>
+    <div class="tax-stat-row">
+      <div class="tax-stat">
+        <div class="tax-stat-num">Every alert</div>
+        <div class="tax-stat-label">carries a triage cost before your team can act on it</div>
+      </div>
+      <div class="tax-stat">
+        <div class="tax-stat-num">At scale</div>
+        <div class="tax-stat-label">the tax compounds — and becomes what causes things to get missed</div>
+      </div>
+      <div class="tax-stat">
+        <div class="tax-stat-num">The window</div>
+        <div class="tax-stat-label">between alert and action is your exposure — every manual step widens it</div>
+      </div>
+    </div>
+    <div class="tax-divider"></div>
+    <div class="tax-closer">samdesk automates the investigation. <span>Your team pays no tax.</span></div>
+  </div>
+
   <!-- Theme -->
   <div class="section">
     <div class="section-label">Campaign theme &amp; taglines</div>
     <div class="card card-green">
       <h2 style="margin-bottom:0.25rem;">"Your tool is busy. Your team is buried. That's not AI."</h2>
-      <p style="font-size:14px; color:var(--text-muted);">Supporting taglines — pick by surface:</p>
+      <p style="font-size:14px; color:var(--text-muted); margin-bottom:0.75rem;">Supporting taglines — pick by surface:</p>
       <div class="tagline-list">
+        <div class="tagline-item">"Every alert comes with an investigation tax. samdesk pays it for you."</div>
         <div class="tagline-item">"One incident. One view. One decision."</div>
         <div class="tagline-item">"Stop triaging. Start deciding."</div>
         <div class="tagline-item">"Built for physical security. Not adapted for it."</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Investigation Tax Messaging Frames -->
+  <div class="section">
+    <div class="section-label">Investigation tax — messaging by angle</div>
+    <div class="frame-grid">
+      <div class="frame-card">
+        <div class="frame-label">Angle</div>
+        <div class="frame-audience">VP / Director — hidden cost</div>
+        <div class="frame-quote">"Your contract has a license fee. Your platform has an investigation tax. The tax is what your analysts pay on every alert before they know if it matters — in time, attention, and delayed response. Most buyers only negotiate the fee."</div>
+      </div>
+      <div class="frame-card">
+        <div class="frame-label">Angle</div>
+        <div class="frame-audience">GSOC Manager — scale problem</div>
+        <div class="frame-quote">"The investigation tax compounds. At low alert volume, it's annoying. At scale, it's what buries your team — and what causes things to get missed."</div>
+      </div>
+      <div class="frame-card">
+        <div class="frame-label">Angle</div>
+        <div class="frame-audience">VP / Director — risk exposure</div>
+        <div class="frame-quote">"The investigation tax has a hidden cost most teams don't measure: the time between an alert firing and your team actually acting. That window is your exposure. Every manual triage step widens it."</div>
+      </div>
+      <div class="frame-card">
+        <div class="frame-label">Angle</div>
+        <div class="frame-audience">All audiences — one-liner</div>
+        <div class="frame-quote" style="font-size:15px; font-weight:600; font-style:normal; border-left-color:var(--green); color:var(--green-dark);">"Every alert comes with an investigation tax. samdesk pays it for you."</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:0.75rem;">Deploy it across surfaces:</p>
+    <div class="deploy-row">
+      <div class="deploy-card">
+        <div class="deploy-surface">Email subject</div>
+        <div class="deploy-text">"The alert tax nobody budgets for"</div>
+      </div>
+      <div class="deploy-card">
+        <div class="deploy-surface">Discovery question</div>
+        <div class="deploy-text">"How long does an analyst spend investigating an alert before acting? Multiply that by daily volume."</div>
+      </div>
+      <div class="deploy-card">
+        <div class="deploy-surface">Talk track close</div>
+        <div class="deploy-text">"Most platforms charge the investigation tax on every alert. We've automated the investigation."</div>
       </div>
     </div>
   </div>
@@ -164,6 +261,11 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td class="td-label">Investigation tax</td>
+            <td class="td-pain">Every alert demands manual triage — verify accuracy, geo-locate, assess severity — before any action is possible</td>
+            <td class="td-good">AI automates the investigation — context, verification, and a ready-to-use situation report delivered automatically</td>
+          </tr>
           <tr>
             <td class="td-label">Alert fatigue</td>
             <td class="td-pain">One incident = 40 separate alerts flooding the queue</td>
@@ -201,7 +303,7 @@
         <div class="mini-label lbl-red">Their nightmare</div>
         <div class="aud-body">Being the last to know — or buried in noise when something real happens.</div>
         <div class="mini-label lbl-green">Lead message</div>
-        <div class="aud-body">"Your team shouldn't spend hours triaging alerts to figure out what matters. That's the AI gap most platforms haven't closed."</div>
+        <div class="aud-body">"Your team shouldn't spend hours triaging alerts to figure out what matters. That's the investigation tax — and most platforms still make you pay it."</div>
       </div>
       <div class="aud-card">
         <div class="aud-name">GSOC Manager / Lead Analyst</div>
@@ -209,7 +311,7 @@
         <div class="mini-label lbl-red">Their nightmare</div>
         <div class="aud-body">Alert storms. Manual triage. Tools that don't explain themselves.</div>
         <div class="mini-label lbl-green">Lead message</div>
-        <div class="aud-body">"If you're still manually verifying alerts before you can act on them, your platform is creating work — not eliminating it."</div>
+        <div class="aud-body">"If you're still manually verifying alerts before you can act, your platform is charging you an investigation tax on every single one. samdesk eliminates it."</div>
       </div>
     </div>
   </div>
@@ -222,109 +324,107 @@
     <div class="usergems-box">
       <strong>UserGems triggers:</strong> Job changes at target accounts · GSOC hiring signals · Renewal windows · Funding / growth events
     </div>
-    <div class="tabs">
-      <div class="tab-row">
-        <button class="tab-btn active" onclick="switchTab(this,'seq-a')">Sequence A — Cold outreach</button>
-        <button class="tab-btn" onclick="switchTab(this,'seq-b')">Sequence B — Warm signal</button>
-        <button class="tab-btn" onclick="switchTab(this,'seq-li')">LinkedIn DM</button>
-      </div>
-      <div class="tab-body">
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab(this,'seq-a')">Sequence A — Cold outreach</button>
+      <button class="tab-btn" onclick="switchTab(this,'seq-b')">Sequence B — Warm signal</button>
+      <button class="tab-btn" onclick="switchTab(this,'seq-li')">LinkedIn DM</button>
+    </div>
+    <div class="tab-body">
 
-        <div id="seq-a" class="tab-pane active">
-          <p class="seq-intro">For VP/Director Security at mid-large enterprise. Tone: peer-to-peer, no jargon, no product dump.</p>
-          <div class="email-block">
-            <div class="email-meta">Email 1 — Day 1</div>
-            <div class="email-subject">Subject: The alert problem nobody talks about</div>
-            <div class="email-body">Hi [First Name],
+      <div id="seq-a" class="tab-pane active">
+        <p class="seq-intro">For VP/Director Security at mid-large enterprise. Tone: peer-to-peer, no jargon, no product dump.</p>
+        <div class="email-block">
+          <div class="email-meta">Email 1 — Day 1</div>
+          <div class="email-subject">Subject: The alert tax nobody budgets for</div>
+          <div class="email-body">Hi [First Name],
 
 Most security leaders I speak with aren't struggling to get alerts.
 
 They're struggling with everything that happens after them — the triage, the validation, the manual context-building before a decision is even possible.
 
-The irony is that most platforms marketed as "AI-driven" still leave that work entirely to your team.
+Every alert your team receives comes with an investigation tax. Most platforms make your analysts pay it on every single one, before they know if it's even worth acting on.
 
-Worth a 15-minute conversation to show you what closing that gap actually looks like?</div>
-          </div>
-          <div class="email-block">
-            <div class="email-meta">Email 2 — Day 4</div>
-            <div class="email-subject">Subject: One incident, 40 alerts</div>
-            <div class="email-body">Hi [First Name],
+Worth a 15-minute conversation to show you what eliminating that tax actually looks like?</div>
+        </div>
+        <div class="email-block">
+          <div class="email-meta">Email 2 — Day 4</div>
+          <div class="email-subject">Subject: One incident, 40 alerts</div>
+          <div class="email-body">Hi [First Name],
 
 One of the most common things we hear from security teams switching platforms:
 
 A single incident generates dozens of separate alerts — each one requiring an analyst to evaluate, verify, and manually piece together the full picture.
 
-That's not a minor annoyance. At scale, it's what causes teams to miss things.
+That's the investigation tax in action. At scale, it's what buries teams and widens the window between alert and action.
 
-samdesk uses AI to deduplicate related alerts into one unified incident view — with context, geo-verification, and a situation report ready to act on.
+samdesk uses AI to deduplicate related alerts into one unified incident view — with context, geo-verification, and a situation report ready to act on. No manual triage required.
 
 Happy to show you the difference in 15 minutes. Open [Day] or [Day]?</div>
-          </div>
-          <div class="email-block">
-            <div class="email-meta">Email 3 — Day 8</div>
-            <div class="email-subject">Subject: What your analysts' time is actually worth</div>
-            <div class="email-body">Hi [First Name],
+        </div>
+        <div class="email-block">
+          <div class="email-meta">Email 3 — Day 8</div>
+          <div class="email-subject">Subject: What your analysts' time is actually worth</div>
+          <div class="email-body">Hi [First Name],
 
 Security teams that move to samdesk consistently tell us the same thing:
 
 They didn't realize how much analyst time was going into triage — until it wasn't.
 
-AI-generated context. Automated deduplication. Self-configurable alert streams. The result is faster decisions with less manual work.
+AI-generated context. Automated deduplication. Self-configurable alert streams. The investigation is done before your team even opens the alert.
 
 If you're evaluating your current platform — or just curious what's changed in the space — I'd like to show you what we're doing differently.</div>
-          </div>
-          <div class="email-block">
-            <div class="email-meta">Email 4 — Day 14</div>
-            <div class="email-subject">Subject: Quick question before your renewal</div>
-            <div class="email-body">Hi [First Name],
+        </div>
+        <div class="email-block">
+          <div class="email-meta">Email 4 — Day 14</div>
+          <div class="email-subject">Subject: Quick question before your renewal</div>
+          <div class="email-body">Hi [First Name],
 
 Not sure where you are in your contract cycle — but if a renewal is coming up, it might be worth a fresh look at what the market can deliver now.
 
 The gap between what platforms promise and what teams actually experience has gotten a lot wider. Especially in physical security, where the investment from some of the bigger players has quietly shifted elsewhere.
 
-We built samdesk specifically for GSOC and corporate security teams. Happy to show you why that focus matters.
+We built samdesk specifically for GSOC and corporate security teams — and we've eliminated the manual investigation tax that most platforms still charge your analysts on every alert.
 
 15 minutes?</div>
-          </div>
         </div>
+      </div>
 
-        <div id="seq-b" class="tab-pane">
-          <p class="seq-intro">Triggered by UserGems: job change, GSOC hiring signal, or known dissatisfaction. Tone: direct, credibility-led.</p>
-          <div class="email-block">
-            <div class="email-meta">Email 1 — Day 1</div>
-            <div class="email-subject">Subject: Saw you're [growing your team / in a new role / expanding GSOC]</div>
-            <div class="email-body">Hi [First Name],
+      <div id="seq-b" class="tab-pane">
+        <p class="seq-intro">Triggered by UserGems: job change, GSOC hiring signal, or known dissatisfaction. Tone: direct, credibility-led.</p>
+        <div class="email-block">
+          <div class="email-meta">Email 1 — Day 1</div>
+          <div class="email-subject">Subject: Saw you're [growing your team / in a new role / expanding GSOC]</div>
+          <div class="email-body">Hi [First Name],
 
 Congratulations on [the new role / the team growth] — moments like this are usually when security leaders take a harder look at the tools they're running.
 
-We work with teams who've moved away from platforms that were generating more noise than clarity — and found that the real value wasn't more alerts. It was faster, better-contextualized decisions with less analyst load.
+We work with teams who've moved away from platforms that were generating more noise than clarity — where analysts were paying an investigation tax on every alert just to figure out if it was worth acting on.
 
 If platform evaluation is on your list, I'd love to show you what samdesk looks like for a GSOC your size.</div>
-          </div>
-          <div class="email-block">
-            <div class="email-meta">Email 2 — Day 5</div>
-            <div class="email-subject">Subject: What "AI-powered" should actually mean for your team</div>
-            <div class="email-body">Hi [First Name],
+        </div>
+        <div class="email-block">
+          <div class="email-meta">Email 2 — Day 5</div>
+          <div class="email-subject">Subject: What "AI-powered" should actually mean for your team</div>
+          <div class="email-body">Hi [First Name],
 
-A lot of platforms use AI to generate more alerts faster.
+A lot of platforms use AI to generate more alerts faster. That's not AI — that's a higher investigation tax.
 
 samdesk uses AI to do the opposite — collapse alert volume, build context automatically, and surface a situation report your team can act on without manual triage.
 
-For a GSOC team, the difference is significant: fewer interruptions, faster decisions, and analysts focused on response — not research.
+For a GSOC team, the difference is significant: no triage tax, faster decisions, analysts focused on response — not research.
 
 15 minutes to walk you through it?</div>
-          </div>
         </div>
-
-        <div id="seq-li" class="tab-pane">
-          <p class="seq-intro">Runs in parallel with email sequence. Keep it brief and human.</p>
-          <div class="email-block">
-            <div class="email-meta">LinkedIn DM</div>
-            <div class="email-body">Hi [First Name] — I work with GSOC and corporate security teams on reducing analyst triage burden and alert fatigue. Most platforms promise AI-driven decisions but still leave the heavy lifting to your team. Would love to show you how samdesk closes that gap. Worth a quick chat?</div>
-          </div>
-        </div>
-
       </div>
+
+      <div id="seq-li" class="tab-pane">
+        <p class="seq-intro">Runs in parallel with email sequence. Keep it brief and human.</p>
+        <div class="email-block">
+          <div class="email-meta">LinkedIn DM</div>
+          <div class="email-body">Hi [First Name] — I work with GSOC and corporate security teams on eliminating the investigation tax that most alerting platforms charge on every alert. Most promise AI-driven decisions but still leave manual triage entirely to your team. Would love to show you how samdesk changes that. Worth a quick chat?</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -336,48 +436,42 @@ For a GSOC team, the difference is significant: fewer interruptions, faster deci
     <p style="font-size:13px; color:var(--text-muted); margin-bottom:1.25rem;">Let the prospect describe their own pain before you introduce samdesk.</p>
 
     <div class="card" style="margin-bottom:1rem;">
-      <h3>On alert fatigue</h3>
-      <div class="q-group">
-        <div class="q-item">
-          <div class="q-lbl">Ask</div>
-          <div class="q-text">"When a major incident unfolds — say, a protest near one of your facilities — how does that typically come through your platform? One notification or multiple?"</div>
-        </div>
-        <div class="q-item">
-          <div class="q-lbl">Ask</div>
-          <div class="q-text">"How do your analysts manage the volume on a high-activity day? Is there a triage process before alerts are acted on?"</div>
-        </div>
+      <h3>On the investigation tax</h3>
+      <div class="q-item">
+        <div class="q-lbl">Ask</div>
+        <div class="q-text">"If you had to estimate how long an analyst spends investigating a single alert before they can act on it — what's that number? Now multiply it by your daily alert volume."</div>
+      </div>
+      <div class="q-item">
+        <div class="q-lbl">Ask</div>
+        <div class="q-text">"How long does it typically take from first alert to having a situation report ready to brief up?"</div>
       </div>
     </div>
 
     <div class="card" style="margin-bottom:1rem;">
-      <h3>On manual triage burden</h3>
-      <div class="q-group">
-        <div class="q-item">
-          <div class="q-lbl">Ask</div>
-          <div class="q-text">"After an alert comes in, what does it take to understand whether it's relevant to your assets and people?"</div>
-        </div>
-        <div class="q-item">
-          <div class="q-lbl">Ask</div>
-          <div class="q-text">"How long does it typically take from first alert to having a situation report ready to brief up?"</div>
-        </div>
+      <h3>On alert fatigue</h3>
+      <div class="q-item">
+        <div class="q-lbl">Ask</div>
+        <div class="q-text">"When a major incident unfolds — say, a protest near one of your facilities — how does that typically come through your platform? One notification or multiple?"</div>
+      </div>
+      <div class="q-item">
+        <div class="q-lbl">Ask</div>
+        <div class="q-text">"How do your analysts manage the volume on a high-activity day? Is there a triage process before alerts are acted on?"</div>
       </div>
     </div>
 
     <div class="card" style="margin-bottom:1rem;">
       <h3>On tool trust &amp; partnership</h3>
-      <div class="q-group">
-        <div class="q-item">
-          <div class="q-lbl">Ask</div>
-          <div class="q-text">"How configurable is your current platform — can your team adjust alert streams without involving the vendor?"</div>
-        </div>
-        <div class="q-item">
-          <div class="q-lbl">Ask</div>
-          <div class="q-text">"How has the partnership felt over the last 12–18 months? Support, responsiveness, roadmap direction?"</div>
-        </div>
-        <div class="q-item">
-          <div class="q-lbl q-lbl-hot">Renewal landmine</div>
-          <div class="q-text">"When did you last go through a renewal? What was that experience like?"</div>
-        </div>
+      <div class="q-item">
+        <div class="q-lbl">Ask</div>
+        <div class="q-text">"How configurable is your current platform — can your team adjust alert streams without involving the vendor?"</div>
+      </div>
+      <div class="q-item">
+        <div class="q-lbl">Ask</div>
+        <div class="q-text">"How has the partnership felt over the last 12–18 months? Support, responsiveness, roadmap direction?"</div>
+      </div>
+      <div class="q-item">
+        <div class="q-lbl q-lbl-hot">Renewal landmine</div>
+        <div class="q-text">"When did you last go through a renewal? What was that experience like?"</div>
       </div>
     </div>
   </div>
@@ -387,9 +481,9 @@ For a GSOC team, the difference is significant: fewer interruptions, faster deci
   <!-- Competitive talk track -->
   <div class="section">
     <div class="section-label">Competitive talk track — when a competitor comes up</div>
-    <div class="quote-block">"We hear from a lot of teams coming off those platforms. The common theme is that they were getting more alerts, not better decisions — and the analyst burden to make sense of them didn't go away.
+    <div class="quote-block">"We hear from a lot of teams coming off those platforms. The common theme is that they were getting more alerts, not better decisions — and the analyst investigation tax to make sense of them didn't go away.
 
-The question we like to ask is: how much time is your team spending after an alert fires, before they can actually act?
+The question we like to ask is: how much time is your team spending after an alert fires, before they can actually act? That's the tax. And most platforms haven't eliminated it.
 
 That's the gap samdesk is built to close. We'd rather show you than tell you — can we do a live demo with a real scenario from your operating environment?"</div>
   </div>
@@ -399,11 +493,12 @@ That's the gap samdesk is built to close. We'd rather show you than tell you —
   <!-- LinkedIn series -->
   <div class="section">
     <div class="section-label">LinkedIn thought leadership series — VP-level audience</div>
-    <div class="li-post"><span class="li-num">Post 1</span><span class="li-text">"The alert isn't the problem. The 45 minutes after it is."</span></div>
-    <div class="li-post"><span class="li-num">Post 2</span><span class="li-text">"Your platform says AI. Your analysts are still doing the triage. That's the gap."</span></div>
-    <div class="li-post"><span class="li-num">Post 3</span><span class="li-text">"One incident shouldn't generate 40 alerts. Here's what deduplication actually looks like in a GSOC."</span></div>
-    <div class="li-post"><span class="li-num">Post 4</span><span class="li-text">"What happened to physical security investment? Why it matters which vendor you're with right now."</span></div>
-    <div class="li-post"><span class="li-num">Post 5</span><span class="li-text">"The renewal trap: why security teams are quietly reevaluating their alerting platforms."</span></div>
+    <div class="li-post"><span class="li-num">Post 1</span><span class="li-text">"Every alert comes with an investigation tax. Most platforms never tell you what it costs."</span></div>
+    <div class="li-post"><span class="li-num">Post 2</span><span class="li-text">"The alert isn't the problem. The 45 minutes of triage after it is."</span></div>
+    <div class="li-post"><span class="li-num">Post 3</span><span class="li-text">"Your platform says AI. Your analysts are still paying the investigation tax. That's the gap."</span></div>
+    <div class="li-post"><span class="li-num">Post 4</span><span class="li-text">"One incident shouldn't generate 40 alerts. Here's what eliminating the triage tax looks like in a GSOC."</span></div>
+    <div class="li-post"><span class="li-num">Post 5</span><span class="li-text">"What happened to physical security investment? Why it matters which vendor you're with right now."</span></div>
+    <div class="li-post"><span class="li-num">Post 6</span><span class="li-text">"The renewal trap: why security teams are quietly reevaluating their alerting platforms."</span></div>
   </div>
 
   <hr>
@@ -415,10 +510,10 @@ That's the gap samdesk is built to close. We'd rather show you than tell you —
       <ul class="checklist">
         <li><div class="chk"></div><span>UserGems: build trigger lists — job changes, GSOC hires, renewal windows at target accounts</span></li>
         <li><div class="chk"></div><span>BDR sequences loaded into outreach tool — Sequence A (cold) and Sequence B (warm signal)</span></li>
-        <li><div class="chk"></div><span>AE talk track reviewed and practiced — discovery questions and competitive handle</span></li>
+        <li><div class="chk"></div><span>AE talk track reviewed and practiced — investigation tax framing, discovery questions, competitive handle</span></li>
         <li><div class="chk"></div><span>One-page competitive contrast sheet built for AEs (what they say vs. what you deliver)</span></li>
-        <li><div class="chk"></div><span>Landing page or campaign page live with hero message</span></li>
-        <li><div class="chk"></div><span>LinkedIn thought leadership series — 4–6 posts scheduled and ready for May launch</span></li>
+        <li><div class="chk"></div><span>Landing page or campaign page live with hero message and investigation tax concept</span></li>
+        <li><div class="chk"></div><span>LinkedIn thought leadership series — 6 posts scheduled and ready for May launch</span></li>
         <li><div class="chk"></div><span>Internal GTM kickoff: brief full team on theme, messaging, and sequences</span></li>
       </ul>
     </div>
@@ -427,8 +522,9 @@ That's the gap samdesk is built to close. We'd rather show you than tell you —
 </div>
 <script>
 function switchTab(btn, id) {
-  btn.closest('.tabs').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn.closest('.tabs').querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  var tabs = btn.closest('div').parentElement;
+  tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  tabs.nextElementSibling.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(id).classList.add('active');
 }
