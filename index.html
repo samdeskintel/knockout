@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>samdesk — Land Grab Knockout Campaign</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1D9E75; --green-dark: #0F6E56; --green-light: #EAF3DE; --green-text: #3B6D11;
+    --red-light: #FAECE7; --red-text: #993C1D;
+    --amber-light: #FAEEDA; --amber-text: #854F0B;
+    --blue-light: #E6F1FB; --blue-text: #185FA5;
+    --gray-light: #F1EFE8; --gray-text: #5F5E5A;
+    --border: #E2E0DA; --surface: #F7F6F3; --white: #ffffff;
+    --text: #1a1a18; --text-muted: #6b6b67; --text-faint: #9e9e99;
+    --radius: 10px; --radius-sm: 6px;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f3ef; color: var(--text); font-size: 15px; line-height: 1.7; }
+  .page { max-width: 880px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* Hero */
+  .hero { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); border-left: 4px solid var(--green); padding: 2rem 2rem 1.75rem; margin-bottom: 2rem; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 0.6rem; }
+  .headline { font-size: 28px; font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 0.5rem; }
+  .subhead { font-size: 15px; color: var(--text-muted); }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.25rem; }
+  .pill { font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; }
+  .p-green { background: var(--green-light); color: var(--green-text); }
+  .p-blue { background: var(--blue-light); color: var(--blue-text); }
+  .p-amber { background: var(--amber-light); color: var(--amber-text); }
+  .p-gray { background: var(--gray-light); color: var(--gray-text); }
+
+  /* Sections */
+  .section { margin-bottom: 2.5rem; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 1rem; }
+  h2 { font-size: 18px; font-weight: 600; margin-bottom: 0.75rem; }
+  h3 { font-size: 15px; font-weight: 600; margin-bottom: 0.5rem; }
+
+  /* Cards */
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .card-green { border-left: 4px solid var(--green); }
+  .card-red { border-left: 4px solid #D85A30; }
+
+  /* Taglines */
+  .tagline-list { display: flex; flex-direction: column; gap: 6px; margin-top: 0.75rem; }
+  .tagline-item { font-size: 14px; padding: 9px 14px; background: var(--surface); border-radius: var(--radius-sm); color: var(--text); border: 1px solid var(--border); }
+
+  /* Pain table */
+  .pain-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--border); }
+  td { padding: 11px 14px; vertical-align: top; border-bottom: 1px solid var(--border); line-height: 1.55; }
+  tr:last-child td { border-bottom: none; }
+  .td-label { font-weight: 600; color: var(--text); font-size: 13px; }
+  .td-pain { color: var(--red-text); font-size: 13px; }
+  .td-good { color: var(--green-dark); font-size: 13px; }
+
+  /* Audience grid */
+  .aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 580px) { .aud-grid { grid-template-columns: 1fr; } }
+  .aud-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+  .aud-name { font-size: 14px; font-weight: 600; }
+  .aud-role { font-size: 12px; color: var(--text-faint); margin-bottom: 0.75rem; }
+  .mini-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; margin-top: 0.75rem; }
+  .lbl-red { color: var(--red-text); }
+  .lbl-green { color: var(--green-dark); }
+  .aud-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* Tabs */
+  .tabs { margin-bottom: 0; }
+  .tab-row { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tab-btn { font-size: 13px; padding: 7px 15px; border: 1px solid var(--border); border-bottom: none; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--surface); color: var(--text-muted); cursor: pointer; font-family: inherit; transition: background 0.12s; }
+  .tab-btn:hover { background: #ece9e4; }
+  .tab-btn.active { background: var(--white); color: var(--text); font-weight: 600; border-color: var(--border); }
+  .tab-body { background: var(--white); border: 1px solid var(--border); border-radius: 0 var(--radius) var(--radius) var(--radius); padding: 1.5rem; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  .seq-intro { font-size: 13px; color: var(--text-muted); margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+
+  /* Email blocks */
+  .email-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; margin-bottom: 0.85rem; }
+  .email-meta { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 6px; }
+  .email-subject { font-size: 13px; font-weight: 600; color: var(--text-muted); padding-bottom: 8px; margin-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .email-body { font-size: 13px; line-height: 1.75; color: var(--text); white-space: pre-line; }
+
+  /* Discovery Qs */
+  .q-group { margin-bottom: 1rem; }
+  .q-item { padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .q-item:last-child { border-bottom: none; }
+  .q-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 3px; }
+  .q-lbl-hot { color: var(--amber-text); }
+  .q-text { font-size: 13px; font-style: italic; color: var(--text); }
+
+  /* Quote block */
+  .quote-block { border-left: 3px solid #E24B4A; background: var(--red-light); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1rem 1.25rem; font-size: 14px; font-style: italic; line-height: 1.75; color: var(--text); margin: 0; white-space: pre-line; }
+
+  /* LinkedIn series */
+  .li-post { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 12px; }
+  .li-num { font-size: 11px; font-weight: 700; color: var(--text-faint); min-width: 42px; padding-top: 1px; }
+  .li-text { font-size: 14px; color: var(--text); }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .checklist li:last-child { border-bottom: none; }
+  .chk { width: 16px; height: 16px; border: 1.5px solid var(--border); border-radius: 3px; flex-shrink: 0; margin-top: 3px; background: var(--white); }
+
+  /* Divider */
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  /* UserGems callout */
+  .usergems-box { background: var(--amber-light); border: 1px solid #FAC775; border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin-bottom: 1.25rem; font-size: 13px; color: var(--amber-text); }
+  .usergems-box strong { font-weight: 600; }
+
+  @media (max-width: 480px) {
+    .headline { font-size: 22px; }
+    .tab-btn { font-size: 12px; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="eyebrow">samdesk — FY Launch Campaign · Corporate Security</div>
+    <div class="headline">"Your tool is busy. Your team is buried.<br>That's not AI."</div>
+    <div class="subhead">Land grab knockout campaign — GSOC &amp; Corporate Security leaders</div>
+    <div class="meta-row">
+      <span class="pill p-green">Launch: May</span>
+      <span class="pill p-blue">Target: VP / Director of Security</span>
+      <span class="pill p-amber">Deal: $50–100K · 16-week cycle</span>
+      <span class="pill p-gray">Tool: UserGems + Outreach</span>
+    </div>
+  </div>
+
+  <!-- Theme -->
+  <div class="section">
+    <div class="section-label">Campaign theme &amp; taglines</div>
+    <div class="card card-green">
+      <h2 style="margin-bottom:0.25rem;">"Your tool is busy. Your team is buried. That's not AI."</h2>
+      <p style="font-size:14px; color:var(--text-muted);">Supporting taglines — pick by surface:</p>
+      <div class="tagline-list">
+        <div class="tagline-item">"One incident. One view. One decision."</div>
+        <div class="tagline-item">"Stop triaging. Start deciding."</div>
+        <div class="tagline-item">"Built for physical security. Not adapted for it."</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Pain pillars -->
+  <div class="section">
+    <div class="section-label">Pain pillars — the gap we own</div>
+    <div class="pain-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:20%;">Pain</th>
+            <th style="width:40%;">What they experience</th>
+            <th style="width:40%;">What samdesk delivers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Alert fatigue</td>
+            <td class="td-pain">One incident = 40 separate alerts flooding the queue</td>
+            <td class="td-good">AI deduplication — one incident, one view, all updates in one place</td>
+          </tr>
+          <tr>
+            <td class="td-label">Manual triage burden</td>
+            <td class="td-pain">Analysts verify accuracy, geo-location &amp; severity manually before acting</td>
+            <td class="td-good">AI-driven context built automatically — ready-to-use situation reports</td>
+          </tr>
+          <tr>
+            <td class="td-label">Tool betrayal</td>
+            <td class="td-pain">Price hikes at renewal, shifting vendor focus away from physical security, poor CS</td>
+            <td class="td-good">Purpose-built for physical security, self-configurable, true partnership</td>
+          </tr>
+          <tr>
+            <td class="td-label">Poor integrations</td>
+            <td class="td-pain">Doesn't orchestrate well with GSOC stack — siloed alerts, no workflow automation</td>
+            <td class="td-good">Integrates and orchestrates with existing tools for end-to-end workflow</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Audience messaging -->
+  <div class="section">
+    <div class="section-label">Audience messaging</div>
+    <div class="aud-grid">
+      <div class="aud-card">
+        <div class="aud-name">VP / Director of Security</div>
+        <div class="aud-role">Economic buyer</div>
+        <div class="mini-label lbl-red">Their nightmare</div>
+        <div class="aud-body">Being the last to know — or buried in noise when something real happens.</div>
+        <div class="mini-label lbl-green">Lead message</div>
+        <div class="aud-body">"Your team shouldn't spend hours triaging alerts to figure out what matters. That's the AI gap most platforms haven't closed."</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-name">GSOC Manager / Lead Analyst</div>
+        <div class="aud-role">Technical champion</div>
+        <div class="mini-label lbl-red">Their nightmare</div>
+        <div class="aud-body">Alert storms. Manual triage. Tools that don't explain themselves.</div>
+        <div class="mini-label lbl-green">Lead message</div>
+        <div class="aud-body">"If you're still manually verifying alerts before you can act on them, your platform is creating work — not eliminating it."</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- BDR Sequences -->
+  <div class="section">
+    <div class="section-label">BDR outreach sequences</div>
+    <div class="usergems-box">
+      <strong>UserGems triggers:</strong> Job changes at target accounts · GSOC hiring signals · Renewal windows · Funding / growth events
+    </div>
+    <div class="tabs">
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="switchTab(this,'seq-a')">Sequence A — Cold outreach</button>
+        <button class="tab-btn" onclick="switchTab(this,'seq-b')">Sequence B — Warm signal</button>
+        <button class="tab-btn" onclick="switchTab(this,'seq-li')">LinkedIn DM</button>
+      </div>
+      <div class="tab-body">
+
+        <div id="seq-a" class="tab-pane active">
+          <p class="seq-intro">For VP/Director Security at mid-large enterprise. Tone: peer-to-peer, no jargon, no product dump.</p>
+          <div class="email-block">
+            <div class="email-meta">Email 1 — Day 1</div>
+            <div class="email-subject">Subject: The alert problem nobody talks about</div>
+            <div class="email-body">Hi [First Name],
+
+Most security leaders I speak with aren't struggling to get alerts.
+
+They're struggling with everything that happens after them — the triage, the validation, the manual context-building before a decision is even possible.
+
+The irony is that most platforms marketed as "AI-driven" still leave that work entirely to your team.
+
+Worth a 15-minute conversation to show you what closing that gap actually looks like?</div>
+          </div>
+          <div class="email-block">
+            <div class="email-meta">Email 2 — Day 4</div>
+            <div class="email-subject">Subject: One incident, 40 alerts</div>
+            <div class="email-body">Hi [First Name],
+
+One of the most common things we hear from security teams switching platforms:
+
+A single incident generates dozens of separate alerts — each one requiring an analyst to evaluate, verify, and manually piece together the full picture.
+
+That's not a minor annoyance. At scale, it's what causes teams to miss things.
+
+samdesk uses AI to deduplicate related alerts into one unified incident view — with context, geo-verification, and a situation report ready to act on.
+
+Happy to show you the difference in 15 minutes. Open [Day] or [Day]?</div>
+          </div>
+          <div class="email-block">
+            <div class="email-meta">Email 3 — Day 8</div>
+            <div class="email-subject">Subject: What your analysts' time is actually worth</div>
+            <div class="email-body">Hi [First Name],
+
+Security teams that move to samdesk consistently tell us the same thing:
+
+They didn't realize how much analyst time was going into triage — until it wasn't.
+
+AI-generated context. Automated deduplication. Self-configurable alert streams. The result is faster decisions with less manual work.
+
+If you're evaluating your current platform — or just curious what's changed in the space — I'd like to show you what we're doing differently.</div>
+          </div>
+          <div class="email-block">
+            <div class="email-meta">Email 4 — Day 14</div>
+            <div class="email-subject">Subject: Quick question before your renewal</div>
+            <div class="email-body">Hi [First Name],
+
+Not sure where you are in your contract cycle — but if a renewal is coming up, it might be worth a fresh look at what the market can deliver now.
+
+The gap between what platforms promise and what teams actually experience has gotten a lot wider. Especially in physical security, where the investment from some of the bigger players has quietly shifted elsewhere.
+
+We built samdesk specifically for GSOC and corporate security teams. Happy to show you why that focus matters.
+
+15 minutes?</div>
+          </div>
+        </div>
+
+        <div id="seq-b" class="tab-pane">
+          <p class="seq-intro">Triggered by UserGems: job change, GSOC hiring signal, or known dissatisfaction. Tone: direct, credibility-led.</p>
+          <div class="email-block">
+            <div class="email-meta">Email 1 — Day 1</div>
+            <div class="email-subject">Subject: Saw you're [growing your team / in a new role / expanding GSOC]</div>
+            <div class="email-body">Hi [First Name],
+
+Congratulations on [the new role / the team growth] — moments like this are usually when security leaders take a harder look at the tools they're running.
+
+We work with teams who've moved away from platforms that were generating more noise than clarity — and found that the real value wasn't more alerts. It was faster, better-contextualized decisions with less analyst load.
+
+If platform evaluation is on your list, I'd love to show you what samdesk looks like for a GSOC your size.</div>
+          </div>
+          <div class="email-block">
+            <div class="email-meta">Email 2 — Day 5</div>
+            <div class="email-subject">Subject: What "AI-powered" should actually mean for your team</div>
+            <div class="email-body">Hi [First Name],
+
+A lot of platforms use AI to generate more alerts faster.
+
+samdesk uses AI to do the opposite — collapse alert volume, build context automatically, and surface a situation report your team can act on without manual triage.
+
+For a GSOC team, the difference is significant: fewer interruptions, faster decisions, and analysts focused on response — not research.
+
+15 minutes to walk you through it?</div>
+          </div>
+        </div>
+
+        <div id="seq-li" class="tab-pane">
+          <p class="seq-intro">Runs in parallel with email sequence. Keep it brief and human.</p>
+          <div class="email-block">
+            <div class="email-meta">LinkedIn DM</div>
+            <div class="email-body">Hi [First Name] — I work with GSOC and corporate security teams on reducing analyst triage burden and alert fatigue. Most platforms promise AI-driven decisions but still leave the heavy lifting to your team. Would love to show you how samdesk closes that gap. Worth a quick chat?</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Discovery Questions -->
+  <div class="section">
+    <div class="section-label">Discovery questions — AE talk track</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:1.25rem;">Let the prospect describe their own pain before you introduce samdesk.</p>
+
+    <div class="card" style="margin-bottom:1rem;">
+      <h3>On alert fatigue</h3>
+      <div class="q-group">
+        <div class="q-item">
+          <div class="q-lbl">Ask</div>
+          <div class="q-text">"When a major incident unfolds — say, a protest near one of your facilities — how does that typically come through your platform? One notification or multiple?"</div>
+        </div>
+        <div class="q-item">
+          <div class="q-lbl">Ask</div>
+          <div class="q-text">"How do your analysts manage the volume on a high-activity day? Is there a triage process before alerts are acted on?"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem;">
+      <h3>On manual triage burden</h3>
+      <div class="q-group">
+        <div class="q-item">
+          <div class="q-lbl">Ask</div>
+          <div class="q-text">"After an alert comes in, what does it take to understand whether it's relevant to your assets and people?"</div>
+        </div>
+        <div class="q-item">
+          <div class="q-lbl">Ask</div>
+          <div class="q-text">"How long does it typically take from first alert to having a situation report ready to brief up?"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem;">
+      <h3>On tool trust &amp; partnership</h3>
+      <div class="q-group">
+        <div class="q-item">
+          <div class="q-lbl">Ask</div>
+          <div class="q-text">"How configurable is your current platform — can your team adjust alert streams without involving the vendor?"</div>
+        </div>
+        <div class="q-item">
+          <div class="q-lbl">Ask</div>
+          <div class="q-text">"How has the partnership felt over the last 12–18 months? Support, responsiveness, roadmap direction?"</div>
+        </div>
+        <div class="q-item">
+          <div class="q-lbl q-lbl-hot">Renewal landmine</div>
+          <div class="q-text">"When did you last go through a renewal? What was that experience like?"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Competitive talk track -->
+  <div class="section">
+    <div class="section-label">Competitive talk track — when a competitor comes up</div>
+    <div class="quote-block">"We hear from a lot of teams coming off those platforms. The common theme is that they were getting more alerts, not better decisions — and the analyst burden to make sense of them didn't go away.
+
+The question we like to ask is: how much time is your team spending after an alert fires, before they can actually act?
+
+That's the gap samdesk is built to close. We'd rather show you than tell you — can we do a live demo with a real scenario from your operating environment?"</div>
+  </div>
+
+  <hr>
+
+  <!-- LinkedIn series -->
+  <div class="section">
+    <div class="section-label">LinkedIn thought leadership series — VP-level audience</div>
+    <div class="li-post"><span class="li-num">Post 1</span><span class="li-text">"The alert isn't the problem. The 45 minutes after it is."</span></div>
+    <div class="li-post"><span class="li-num">Post 2</span><span class="li-text">"Your platform says AI. Your analysts are still doing the triage. That's the gap."</span></div>
+    <div class="li-post"><span class="li-num">Post 3</span><span class="li-text">"One incident shouldn't generate 40 alerts. Here's what deduplication actually looks like in a GSOC."</span></div>
+    <div class="li-post"><span class="li-num">Post 4</span><span class="li-text">"What happened to physical security investment? Why it matters which vendor you're with right now."</span></div>
+    <div class="li-post"><span class="li-num">Post 5</span><span class="li-text">"The renewal trap: why security teams are quietly reevaluating their alerting platforms."</span></div>
+  </div>
+
+  <hr>
+
+  <!-- Launch checklist -->
+  <div class="section">
+    <div class="section-label">Launch checklist — May FY start</div>
+    <div class="card">
+      <ul class="checklist">
+        <li><div class="chk"></div><span>UserGems: build trigger lists — job changes, GSOC hires, renewal windows at target accounts</span></li>
+        <li><div class="chk"></div><span>BDR sequences loaded into outreach tool — Sequence A (cold) and Sequence B (warm signal)</span></li>
+        <li><div class="chk"></div><span>AE talk track reviewed and practiced — discovery questions and competitive handle</span></li>
+        <li><div class="chk"></div><span>One-page competitive contrast sheet built for AEs (what they say vs. what you deliver)</span></li>
+        <li><div class="chk"></div><span>Landing page or campaign page live with hero message</span></li>
+        <li><div class="chk"></div><span>LinkedIn thought leadership series — 4–6 posts scheduled and ready for May launch</span></li>
+        <li><div class="chk"></div><span>Internal GTM kickoff: brief full team on theme, messaging, and sequences</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<script>
+function switchTab(btn, id) {
+  btn.closest('.tabs').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.closest('.tabs').querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>
